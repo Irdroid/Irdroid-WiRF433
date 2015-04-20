@@ -1,0 +1,19 @@
+WIFI-RF433.sch at 2/12/2015 3:10:45 PM
+
+Assembly variant: 
+
+Qty Value           Device          Parts                              
+
+1   p header 1x 3   JP              JP2
+2   p. header 1x14  HLK-RM04                                                             
+1   1k              R-EU_M0805      R1                                 
+1   10BQ100         DIODE-SMB       D1                                 
+8   50              R-EU_R0805      R7, R8, R9, R10, R13, R14, R15, R16
+6   100n            C-EUC0805       C1, C2, C3, C8, C12, C14           
+1   220µF           CPOL-EUE3.5-8   C10                                
+2   220R            R-EU_R0805      R5, R12                                                          
+1   LED 0805 SMD    LEDCHIP-LED0805 PWR                                
+1   POWER_JACKPTH   POWER_JACKPTH   J1                                 
+1   RJ-45 LAN       MAGJACKRJ45     U$2                                
+1   RJ-45 WAN       MAGJACKRJ45     U$1                                
+1   VREG-7805-DPAK2 VREG-7805-DPAK2 U$3                                

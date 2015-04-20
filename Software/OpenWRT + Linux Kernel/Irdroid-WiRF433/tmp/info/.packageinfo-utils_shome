@@ -1,0 +1,17 @@
+Source-Makefile: package/utils/shome/Makefile
+Package: shome
+Version: 1
+Depends: +libc +USE_EGLIBC:librt +USE_EGLIBC:libpthread +libstdcpp
+Menu-Depends: 
+Provides: 
+Section: utils
+Category: Utilities
+Title: shome -- openWRT home automation
+Maintainer: 
+Source: 
+Type: ipkg
+Description: shome -- openWRT home automation
+
+@@
+
+

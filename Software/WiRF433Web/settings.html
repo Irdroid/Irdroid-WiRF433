@@ -1,0 +1,185 @@
+<html> 
+	<head>
+   <title>WiRF433 Remote</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="../images/conference-room.png"/>
+    <link rel="stylesheet" href="./js/jquery.mobile-1.3.0.min.css" />
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="./js/jquery.mobile-1.3.0.min.js"></script>
+    <link rel="stylesheet" href="wirf433.css" />
+    
+	</head> 
+ 
+	<body onload="onBobyLoad()"> 
+		<div data-role="header" data-position="inline" data-theme="b" >
+			 <a href="index.html"  data-ajax="false">back</a>
+   
+			<h1>WiRF433</h1>
+			<a href="add_todo.html" data-icon="add" iconpos="notext" data-position="inline"  data-rel="dialog">Add</a>
+		</div><p>
+     <div data-role="content">
+		<div class="content-primary" style="margin:3px;">	
+			<ul data-role="listview" data-inset="true" data-split-icon="minus" data-split-theme="d" id="todo_list">
+	
+      
+    
+    
+    	</ul>
+          
+		</div>	
+    </div>
+		<div data-role="footer" data-position="fixed" data-theme="b" style="text-align:center;padding:5px 0px;">
+			<a href="http://www.irdroid.com" data-theme="b" data-icon="star">More info about Irdroid</a>
+		</div> 
+	</body>
+</html>
+
+<script language="javascript">
+var i = localStorage.length;
+
+
+
+
+function onBobyLoad(){
+	var todo = "";
+  	var device = "";
+  var device_type = "";      
+	create_new_list();
+    $("#content").trigger("create");
+  
+	 	
+	$("#clear").click(function(){
+		localStorage.clear();
+		$("#todo_list li").fadeOut(function(){
+			$(this).html("");
+		});
+	});
+
+	$("#remove").live("click",function(e){
+		var index = $(this).closest("li").attr("id");
+		$(this).closest("li").slideUp(function(){
+		
+			// remove the selected item
+			localStorage.removeItem('names_'+index);
+		   	localStorage.removeItem('devices_'+index);
+			// rearrange localstorage array 
+			for(i=0; i<localStorage.length / 2; i++) {
+			 if( !localStorage.getItem("names_"+i)) {
+			localStorage.setItem("names_"+i, localStorage.getItem('names_' + (i+1) ) );
+			localStorage.removeItem('names_'+ (i+1) );
+			  }
+        
+        
+			}
+      	for(i=0; i<localStorage.length / 2; i++) {
+			 if( !localStorage.getItem("devices_"+i)) {
+			localStorage.setItem("devices_"+i, localStorage.getItem('devices_' + (i+1) ) );
+			localStorage.removeItem('devices_'+ (i+1) );
+			  }
+        
+        
+			}
+      
+			  
+			// clear existing list UI
+			$("#todo_list").html("");
+			
+			// create new list
+			create_new_list();
+		});
+	});
+}
+function isEven(n) {
+  return n == parseFloat(n)? !(n%2) : void 0;
+}
+
+// Use strict equality === for "is number" test
+function isEvenStrict(n) {
+  return n === parseFloat(n)? !(n%2) : void 0;
+}
+
+function create_new_list(){
+  
+  if (isEven(localStorage.length)){    
+	for (var i = 0; i < (localStorage.length / 2) ; i++){
+		
+   
+          console.log(localStorage.length);    
+           
+                 
+               
+               todo = localStorage.getItem('names_'+i);
+                
+            $("#todo_list").append('<li id="'+i+'"><a><label for="P03"><b>'+todo+'</b></label><select name="'+todo+'" id="'+todo+'" data-mini="false" data-role="slider"><option value="0">Off</option><option value="1">On</option></select></a><a href="#"  data-transition="slideup" id="remove">Remove</a></li>');
+             $("#todo_list").trigger("create");    
+      
+       
+	}	
+  }else
+  
+  {    
+	for (var i = 0; i < (localStorage.length / 2)-1; i++){
+		
+   
+          console.log(localStorage.length);    
+           
+                 
+               
+               todo = localStorage.getItem('names_'+i);
+                
+            $("#todo_list").append('<li id="'+i+'"><a><label for="P03"><b>'+todo+'</b></label><select name="'+todo+'" id="'+todo+'" data-mini="false" data-role="slider"><option value="0">Off</option><option value="1">On</option></select></a><a href="#"  data-transition="slideup" id="remove">Remove</a></li>');
+             $("#todo_list").trigger("create");    
+      
+       
+	}	
+  }
+	// Refresh list so jquery mobile can apply iphone look to the list
+	$("#todo_list").listview();
+	$("#todo_list").listview("refresh");	
+}
+
+
+
+function save_todo(){
+	todo = $("#textinput1").val();
+  device_type = document.getElementById("selector1").value;
+   if (localStorage.length == 0){
+   
+   j = 0;
+   }else {
+   
+   var j = localStorage.length / 2;
+   }
+    
+  
+  
+  
+  
+  if(todo.length){
+		// store item in local storage
+		localStorage['names_'+j] = todo;
+  
+    console.log("number: "+j);
+  
+         	$("#todo_list").append('<li id="'+j+'"><a><label for="'+todo+'"><b>'+todo+'</b></label><select name="'+device_type+'" id="'+device_type+'" data-mini="false" data-role="slider"><option value="0">Off</option><option value="1">On</option></select></a><a href="#" data-transition="slideup" id="remove">Remove</a></li>');
+		    $("#todo_list").trigger("create");
+		// Refresh list so jquery mobile can apply iphone look to the list
+	
+     
+		// Update todo list
+	  localStorage['devices_'+j] = device_type;
+    
+      j++; 
+      
+      
+		   	$("#todo_list").listview();
+		$("#todo_list").listview("refresh");	
+	}
+    
+     
+
+}
+</script>
