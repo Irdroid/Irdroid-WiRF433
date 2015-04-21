@@ -39,7 +39,7 @@ switches and a Mobile HTML5 web application , configured for work with the RC sw
 ###WEB RESOURCES:
 - http://www.irdroid.com - The Irdroid project website, where Irdroid WiRF433 board info is hosted
 - http://github.com/irdroid - Project's Github repositories.
-- http://www.irdroid.eu - Currently you can purchase a sample board from irdroid.eu # 38$
+- http://www.irdroid.eu/product/irdroid-wifi-rf433mhz-development-computer/ - Currently you can purchase a sample board from irdroid.eu for 38$
 
 ###HARDWARE
 The Hardware project is released under the Creative Commons Attribution-Share Alike 3.0 United States License. You may reproduce it for both your own personal use, and for commertial use. You will have to provide a link to the original creator of the project http://www.irdroid.com on any documentation or website.
